@@ -1,95 +1,96 @@
-function addition(...args) {
-  let total = args.reduce((prev, arg) => {
-    return (prev += arg);
-  }, 0);
-  return total;
+
+function addition(prev, curr) {
+  prev = prev + curr;
+  return prev;
 }
 
-function multiplication(...args) {
-  let total = args.reduce((prev, arg) => {
-    return (prev *= arg);
-  }, 1);
-  return total;
+function multiplication(prev, curr) {
+  prev = prev * curr;
+  return prev;
 }
-function subtraction(...args) {
-   
-  let total = args.reduce((prev, arg) =>{
-      return prev -= arg;
-    }, );
-  return total;
+function subtraction(prev, curr) {
+  prev = prev * curr;
+  return prev;
 }
-function division(...args) {
- let total = args.reduce((prev, arg) =>{
-    return prev /= arg;
-}, );
-  return total;
+function division(prev, curr) {
+  prev = prev / curr;
+  return prev;
 }
 
-
-function operate(...args) {
-    
-  switch (args) {
+function operate(prev, operation, curr) {
+  debugger;
+  let total;
+  switch (operation) {
     case "+": {
-
-    return (addition(...args))
-      
+      total = addition(prev, curr);
+      break;
     }
     case "-": {
-   return(subtraction(...args));
-      
+      total = subtraction(prev, curr);
+      break;
     }
     case "*": {
-        return(multiplication(...args))
-        
+      total = multiplication(prev, curr);
+      break;
     }
     case "/": {
-    return  (division(...args));
-      
+      total = division(prev, curr);
+      break;
     }
-   
+    default:
+      return;
   }
+  return total;
 }
 
+const display = document.querySelector("[data-input]");
+const numberButtons = document.querySelectorAll("[data-number]");
+const operationButtons = document.querySelectorAll("[data-operation]");
+const equalsButton = document.querySelector("[data-equals]");
+const deleteButton = document.querySelector("[data-delete]");
+const allClearButton = document.querySelector("[data-all-clear]");
 
-var display = document.querySelectorAll('input');
-display[1].addEventListener('click',()=>{ forms.answer.value=  " "});
-display[2].addEventListener('click',()=>{ forms.answer.value= forms.answer.value.substr(0 , forms.answer.value.length -1)});
 
-display[4].addEventListener('click',()=>{ forms.answer.value+= display[4].value});
-display[5].addEventListener('click',()=>{ forms.answer.value+= display[5].value});
-display[6].addEventListener('click',()=>{ forms.answer.value+= display[6].value});
-display[7].addEventListener('click',()=>{ forms.answer.value+= display[7].value});
-display[8].addEventListener('click',()=>{ forms.answer.value+= display[8].value});
-display[9].addEventListener('click',()=>{ forms.answer.value+= display[9].value});
+let operands1
+let operands2
 
-display[10].addEventListener('click',()=>{ forms.answer.value+= display[11].value});
-display[11].addEventListener('click',()=>{ forms.answer.value+= display[11].value});
-display[12].addEventListener('click',()=>{ forms.answer.value+= display[12].value});
-display[13].addEventListener('click',()=>{ forms.answer.value+= display[13].value});
-display[14].addEventListener('click',()=>{ forms.answer.value+= display[14].value});
-display[15].addEventListener('click',()=>{ forms.answer.value+= display[15].value});
-display[16].addEventListener('click',()=>{ forms.answer.value+= display[16].value});
-
-display[17].addEventListener('click',()=>{ 
-    
- let result=forms.answer.value.split("").map(function(item) {
-   
-    return parseInt(item, 10);
-});
- console.log(result)
+numberButtons.forEach((button) => {
  
-//  forms.answer.value= operate(parseInt(result[1],result[2],result[0]));
- 
+  button.addEventListener("click", () => {
+    if(button==numberButtons[0]){
+      forms.answer.value += button.value;
+     return (operands1 = parseFloat(button.value));
+    }
 
-
+    forms.answer.value += button.value;
+    return (operands2 = parseFloat(button.value));
+  });
 });
 
 
+let operator = operationButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    forms.answer.value += button.value;
+    return (operator = button.value);
+  });
+});
 
+allClearButton.addEventListener("click", () => {
+  forms.answer.value = " ";
+});
 
+deleteButton.addEventListener("click", () => {
+  forms.answer.value = forms.answer.value.substr(
+    0,
+    forms.answer.value.length - 1
+  );
+});
 
-
-
-
+equalsButton.addEventListener("click", () => {
+  debugger;
+  let result = operate(operands1, operator, operands2);
+  forms.answer.value = "";
+  forms.answer.value = result;
+});
 
 
