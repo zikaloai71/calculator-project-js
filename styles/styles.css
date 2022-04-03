@@ -1,0 +1,39 @@
+body{
+    background: rgb(29,56,158);
+background: linear-gradient(90deg, rgba(29,56,158,0.9783263647255778) 28%, rgba(233,148,226,1) 98%);
+}
+form{
+ width: 30%;
+ margin:20vh auto;
+}
+.border-r{
+    width:97.8% ;
+    height: 5vh;
+    outline: 0px;
+    border: 0px;
+    border-radius: 10px 10px 0px 0px ;
+    text-indent: 10px;
+
+}
+input[type="button"]{
+    width: 24%;
+    border: 0;
+    outline: 0;
+    height: 10vh;
+    cursor: pointer;
+    margin-top: 5px;
+    background-color: blanchedalmond;
+    color: rgb(70, 70, 154);
+    font: 2em sans-serif;
+}
+
+.border-rl{
+    border-radius: 0px 0px 0px 10px ;
+   
+}
+.border-rr{
+    border-radius: 0px 0px 10px 0px ;
+}
+div button:hover{
+    opacity: 0.7;
+}
