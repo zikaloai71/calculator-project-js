@@ -28,13 +28,7 @@ input[type="button"]{
     font: 2em sans-serif;
 }
 
-.border-rl{
-    border-radius: 0px 0px 0px 10px ;
-   
-}
-.border-rr{
-    border-radius: 0px 0px 10px 0px ;
-}
-div button:hover{
+
+div input:hover{
     opacity: 0.7;
 }

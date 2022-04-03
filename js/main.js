@@ -1,4 +1,3 @@
-
 function addition(prev, curr) {
   prev = prev + curr;
   return prev;
@@ -50,26 +49,19 @@ const equalsButton = document.querySelector("[data-equals]");
 const deleteButton = document.querySelector("[data-delete]");
 const allClearButton = document.querySelector("[data-all-clear]");
 
-
-let operands1
-let operands2
+let operands1;
+let operands2;
 
 numberButtons.forEach((button) => {
- 
   button.addEventListener("click", () => {
-    if(button==numberButtons[0]){
-      forms.answer.value += button.value;
-     return (operands1 = parseFloat(button.value));
-    }
-
     forms.answer.value += button.value;
     return (operands2 = parseFloat(button.value));
   });
 });
 
-
 let operator = operationButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    operands1 = parseFloat(forms.answer.value);
     forms.answer.value += button.value;
     return (operator = button.value);
   });
@@ -92,5 +84,3 @@ equalsButton.addEventListener("click", () => {
   forms.answer.value = "";
   forms.answer.value = result;
 });
-
-
