@@ -42,7 +42,7 @@ function operate(prev, operation, curr) {
   return total;
 }
 
-const display = document.querySelector("[data-input]");
+const display = forms.answer.value;
 const numberButtons = document.querySelectorAll("[data-number]");
 const operationButtons = document.querySelectorAll("[data-operation]");
 const equalsButton = document.querySelector("[data-equals]");
@@ -54,8 +54,10 @@ let operands2;
 
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    debugger;
     forms.answer.value += button.value;
     return (operands2 = parseFloat(button.value));
+    //300+10=300  operand 2 =0
   });
 });
 
@@ -63,7 +65,7 @@ let operator = operationButtons.forEach((button) => {
   button.addEventListener("click", () => {
     operands1 = parseFloat(forms.answer.value);
     forms.answer.value += button.value;
-    return (operator = button.value);
+    operator = button.value;
   });
 });
 
@@ -80,6 +82,7 @@ deleteButton.addEventListener("click", () => {
 
 equalsButton.addEventListener("click", () => {
   debugger;
+
   let result = operate(operands1, operator, operands2);
   forms.answer.value = "";
   forms.answer.value = result;

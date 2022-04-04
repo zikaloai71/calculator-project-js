@@ -5,14 +5,20 @@ background: linear-gradient(90deg, rgba(29,56,158,0.9783263647255778) 28%, rgba(
 form{
  width: 30%;
  margin:20vh auto;
+ box-shadow: -40px 7px 100px -6px rgba(77,55,55,0.5);
 }
-.border-r{
+
+input[type="text"]{
     width:97.8% ;
     height: 5vh;
     outline: 0px;
     border: 0px;
     border-radius: 10px 10px 0px 0px ;
     text-indent: 10px;
+    background-color: bisque;
+    font-size: large;
+    
+
 
 }
 
