@@ -8,7 +8,7 @@ function multiplication(prev, curr) {
   return prev;
 }
 function subtraction(prev, curr) {
-  prev = prev * curr;
+  prev = prev - curr;
   return prev;
 }
 function division(prev, curr) {
@@ -56,8 +56,8 @@ numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
     debugger;
     forms.answer.value += button.value;
-    return (operands2 = parseFloat(button.value));
-    //300+10=300  operand 2 =0
+    
+
   });
 });
 
@@ -82,7 +82,9 @@ deleteButton.addEventListener("click", () => {
 
 equalsButton.addEventListener("click", () => {
   debugger;
+  let op=forms.answer.value.split(`${operator}`)
 
+  operands2 = parseFloat(op[1]);
   let result = operate(operands1, operator, operands2);
   forms.answer.value = "";
   forms.answer.value = result;
