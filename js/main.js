@@ -17,23 +17,24 @@ function division(prev, curr) {
 }
 
 function operate(prev, operation, curr) {
-  debugger;
   let total;
+  let prevNum = parseFloat(prev)
+  let currNum = parseFloat(curr)
   switch (operation) {
     case "+": {
-      total = addition(prev, curr);
+      total = addition(prevNum, currNum);
       break;
     }
     case "-": {
-      total = subtraction(prev, curr);
+      total = subtraction(prevNum, currNum);
       break;
     }
-    case "*": {
-      total = multiplication(prev, curr);
+    case "x": {
+      total = multiplication(prevNum, currNum);
       break;
     }
-    case "/": {
-      total = division(prev, curr);
+    case "÷": {
+      total = division(prevNum, currNum);
       break;
     }
     default:
@@ -49,43 +50,105 @@ const equalsButton = document.querySelector("[data-equals]");
 const deleteButton = document.querySelector("[data-delete]");
 const allClearButton = document.querySelector("[data-all-clear]");
 
-let operands1;
-let operands2;
+
 
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    debugger;
+    if(forms.answer.value === "wrong mathematic input"){
+      forms.answer.value = ""
+      forms.answer.style.color="black"
+    }
+    else if (forms.answer.style.color="green"){
+      forms.answer.style.color="black"
+    }
     forms.answer.value += button.value;
-    
-
   });
 });
 
 let operator = operationButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    operands1 = parseFloat(forms.answer.value);
-    forms.answer.value += button.value;
+    if(forms.answer.value === "wrong mathematic input"){
+      forms.answer.value = ""
+      forms.answer.style.color="black"
+    }
+    else if (forms.answer.style.color="green"){
+      forms.answer.style.color="black"
+    }
+    forms.answer.value += " " +button.value+ " ";
     operator = button.value;
   });
 });
 
 allClearButton.addEventListener("click", () => {
-  forms.answer.value = " ";
+  forms.answer.value = "";
 });
 
 deleteButton.addEventListener("click", () => {
-  forms.answer.value = forms.answer.value.substr(
+  let tempStr = forms.answer.value.split(" ").join("")
+  tempStr = tempStr.substr(
     0,
-    forms.answer.value.length - 1
+    tempStr.length - 1
   );
+  forms.answer.value = tempStr
 });
 
 equalsButton.addEventListener("click", () => {
-  debugger;
-  let op=forms.answer.value.split(`${operator}`)
-
-  operands2 = parseFloat(op[1]);
-  let result = operate(operands1, operator, operands2);
-  forms.answer.value = "";
-  forms.answer.value = result;
+  let result = 0
+  let prevResult=[]
+  const [operators , numbers] = splitString(forms.answer.value)
+  
+  if(operators.length === 0){
+    
+    forms.answer.value = "wrong mathematic input"
+    forms.answer.style.color="red"
+  }
+  else if(operators.length + 1 === numbers.length ){
+    for(let i = 0 ; i < numbers.length  ; i++){
+      if(prevResult.length > 0){
+       result = operate(prevResult[0],operators[i-1],numbers[i])
+       prevResult.pop()
+       prevResult.push(result)
+      }
+      else{
+        result = operate(numbers[i],operators[i],numbers[i+1])
+        prevResult.push(result)
+        i++;
+      }
+    }
+    forms.answer.value = result;
+    forms.answer.style.color="green"
+  }
+  else{
+    forms.answer.value = "wrong mathematic input"
+    forms.answer.style.color="red"
+  }
+ 
 });
+
+function splitString(str){
+  let operatorsSigns={
+    "+":"+",
+    "-":"-",
+    "÷":"÷",
+    "x":"x"
+  }
+  let operators = []
+  let numbers = []
+  for(let i = 0 ; i <str.length; i++){
+    let current = str[i]
+    if(operatorsSigns[current]){
+     operators.push(current)
+    }
+    else{
+      let num =current
+      let index = i+1
+      while(!operatorsSigns[str[index]] && index < str.length){
+        num+=str[index]
+        index++;
+        i=index-1
+      }
+      numbers.push(num)
+    }
+  }
+ return [operators,numbers]
+}
